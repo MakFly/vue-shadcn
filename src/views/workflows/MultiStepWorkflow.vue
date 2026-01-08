@@ -1,21 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useFormWorkflowStore } from '@/stores/formWorkflow'
-import { toTypedSchema } from '@vee-validate/zod'
-import { useForm } from 'vee-validate'
 import * as z from 'zod'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Progress } from '@/components/ui/progress'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
 import { toast } from 'vue-sonner'
 
 const workflow = useFormWorkflowStore()
@@ -28,9 +19,9 @@ const step1 = computed(() => workflow.formData.step1 || { firstName: '', lastNam
 const step2 = computed(() => workflow.formData.step2 || { address: '', city: '', zipCode: '' })
 const step3 = computed(() => workflow.formData.step3 || { paymentMethod: '', terms: false })
 
-const step1Errors = ref<{ [key: string]: string }>({})
-const step2Errors = ref<{ [key: string]: string }>({})
-const step3Errors = ref<{ [key: string]: string }>({})
+const step1Errors = ref<Record<string, string[]>>({})
+const step2Errors = ref<Record<string, string[]>>({})
+const step3Errors = ref<Record<string, string[]>>({})
 
 const step1Schema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),

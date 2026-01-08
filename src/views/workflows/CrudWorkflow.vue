@@ -7,7 +7,6 @@ import * as z from 'zod'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Table,
   TableBody,
@@ -41,7 +40,6 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { toast } from 'vue-sonner'
 
 const userStore = useUserStore()
 const isDialogOpen = ref(false)
@@ -94,7 +92,7 @@ async function saveUser() {
     return
   }
 
-  const values = form.values
+  const values = form.values as any
 
   if (editingUser.value) {
     await userStore.updateUser(editingUser.value.id, values)
