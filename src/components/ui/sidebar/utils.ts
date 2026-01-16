@@ -17,3 +17,11 @@ export const [useSidebar, provideSidebarContext] = createContext<{
   setOpenMobile: (value: boolean) => void
   toggleSidebar: () => void
 }>("Sidebar")
+
+export function useSidebarState() {
+  const context = useContext(SidebarContext)
+  if (!context) {
+    throw new Error("useSidebarState must be used within a SidebarProvider")
+  }
+  return context
+}
